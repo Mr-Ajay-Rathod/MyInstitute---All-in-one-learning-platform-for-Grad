@@ -1,0 +1,106 @@
+body {
+    font-family: poppins, sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.search-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    padding: 65px 10px 10px; /* Added padding to prevent content from being hidden behind the fixed search bar */
+    box-sizing: border-box;
+    overflow-y: auto;
+    flex: 1;
+}
+
+h1 {
+    text-align: center;
+    color: #333333;
+}
+
+p {
+    text-align: center;
+    color: #666666;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.category {
+    flex: 1 1 22%;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category:hover {
+    background-color: #eeeeee;
+}
+
+@media screen and (max-width: 768px) {
+    .category {
+        flex: 1 1 45%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .category {
+        flex: 1 1 90%;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}
+
+#options-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: none;
+}
+
+#backButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: #555;
+}

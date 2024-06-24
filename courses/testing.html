@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Course Container</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="course-container">
+        <div class="course-card">
+            <img src="mobile.webp" alt="Tech Interview 101" class="course-image">
+            <div class="course-details">
+                <h2>Tech Interview 101 - From DSA to System Design for...</h2>
+                <p class="discount">Flat 40% OFF</p>
+                <div class="offer">
+                    <p class="price">₹11999.0 <span class="original-price">₹19999.0</span></p>
+                    <p class="rating">⭐ 4.6</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="course-card">
+            <img src="mobile.webp" alt="Tech Interview 101" class="course-image">
+            <div class="course-details">
+                <h2>Tech Interview 101 - From DSA to System Design for...</h2>
+                <p class="discount">Flat 40% OFF</p>
+                <div class="offer">
+                    <p class="price">₹11999.0 <span class="original-price">₹19999.0</span></p>
+                    <p class="rating">⭐ 4.6</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="course-card">
+            <img src="mobile.webp" alt="Tech Interview 101" class="course-image">
+            <div class="course-details">
+                <h2>Tech Interview 101 - From DSA to System Design for...</h2>
+                <p class="discount">Flat 40% OFF</p>
+                <div class="offer">
+                    <p class="price">₹11999.0 <span class="original-price">₹19999.0</span></p>
+                    <p class="rating">⭐ 4.6</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="course-card">
+            <img src="mobile.webp" alt="Tech Interview 101" class="course-image">
+            <div class="course-details">
+                <h2>Tech Interview 101 - From DSA to System Design for...</h2>
+                <p class="discount">Flat 40% OFF</p>
+                <div class="offer">
+                    <p class="price">₹11999.0 <span class="original-price">₹19999.0</span></p>
+                    <p class="rating">⭐ 4.6</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</body>
+</html>
+
+
+
+
+<style>
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+    body {
+    font-family: poppins, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.course-container {
+    max-width: 1180px;    
+    margin-inline : auto ;
+    width: 100%;
+    padding: 20px;
+}
+
+.course-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    padding: px 0;
+}
+
+.course-image {
+    width: 300px;
+    height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.course-details {
+    margin-left: 10px;
+    flex-grow: 1;
+}
+
+.course-details h2 {
+    position: absolute ;
+    top: 0;
+    font-size: 20px;
+    margin: 0 0 5px;
+    color: #333;
+}
+
+.offer {
+    display: flex;
+    justify-content: baseline;
+    gap : 20%
+}
+
+.discount {
+    color: #d9534f;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
+
+.original-price {
+    text-decoration: line-through;
+    color: #aaa;
+    margin-left: 5px;
+}
+
+.rating {
+    font-size: 16px;
+    color: #f0ad4e;
+    margin-bottom: 10px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .course-card {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .course-details {
+        margin-left: 10px;
+    }
+
+    .course-image {
+        width: 150px;
+        height: 90px;
+    }
+
+    .course-details h2 {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .rating {
+        font-size: 14px;
+    }
+}
+
+</style>

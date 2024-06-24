@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif; /* Ensure font-family is correctly referenced */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden; /* Ensure no scrolling */
+        }
+
+        .container4 {
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-sizing: border-box; /* Ensures padding is included in the width */
+        }
+
+        .slider-container4 {
+            overflow: hidden;
+        }
+
+        .slider4 {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide4 {
+            min-width: 80%;
+            margin-right: 5%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide4 img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .details4 {
+            padding: 10px;
+            background: #fff;
+            width: 100%;
+            text-align: center;
+        }
+
+        .details4 p {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .prev4, .next4 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+        }
+
+        .prev4 {
+            left: 10px;
+        }
+
+        .next4 {
+            right: 10px;
+        }
+
+        /* Show buttons on larger screens */
+        @media (min-width: 768px) {
+            .prev4, .next4 {
+                display: block;
+            }
+
+            .slide4 {
+                min-width: 30%;
+                margin-right: 2.5%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .slide4 {
+                min-width: 30%;
+                margin-right: 2.5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container4 ">
+        <div class="slider-container4">
+            <div class="slider4">
+                <div class="slide4">
+                    <img class="images4" src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+
+                <div class="slide4">
+                    <img src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+
+                <div class="slide4">
+                    <img src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+                <!-- Add more slides as needed -->
+            </div>
+        </div>
+        <button class="prev4" onclick="slide4(-1)">&#10094;</button>
+        <button class="next4" onclick="slide4(1)">&#10095;</button>
+    </div>
+
+    <script>
+        let currentSlide4 = 0;
+        const slider4 = document.querySelector('.slider4');
+        const slides4 = document.querySelectorAll('.slide4');
+        const totalSlides4 = slides4.length;
+
+        function slide4(direction) {
+            currentSlide4 += direction;
+
+            if (currentSlide4 < 0) {
+                currentSlide4 = totalSlides4 - 1;
+            } else if (currentSlide4 >= totalSlides4) {
+                currentSlide4 = 0;
+            }
+
+            slider4.style.transform = `translateX(${-currentSlide4 * (slides4[0].clientWidth + 20)}px)`;
+        }
+
+        // Touch events for mobile sliding
+        let startX4 = null;
+
+        slider4.addEventListener('touchstart', (e) => {
+            startX4 = e.touches[0].clientX;
+        });
+
+        slider4.addEventListener('touchmove', (e) => {
+            if (!startX4) return;
+            const endX4 = e.touches[0].clientX;
+            const diff4 = startX4 - endX4;
+
+            if (diff4 > 50) {
+                slide4(1);
+                startX4 = null;
+            } else if (diff4 < -50) {
+                slide4(-1);
+                startX4 = null;
+            }
+        });
+    </script>
+</body>
+</html>

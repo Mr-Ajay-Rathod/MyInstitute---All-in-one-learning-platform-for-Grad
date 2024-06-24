@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories and Subcategories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Existing Slider Section -->
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slider-wrapper">
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 1" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 1" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 2" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 2" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 3" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 3" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 4" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 4" class="mobile-image">
+                </div>
+            </div>
+            <div class="navigation desktop-only">
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+        </div>
+        <div class="dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <span class="heading">Select the goal you want...</span>
+    </div>
+
+    <div class="container">
+        <ul id="category-list">
+            <li onclick="showOptions('neet')">
+                <div class="category-info">
+                    <span class="category-name">NEET</span>
+                    <span class="category-subtitle">Class 11 | Class 12 | Class 12+</span>
+                </div>
+            </li>
+            <li onclick="showOptions('iitjee')">
+                <div class="category-info">
+                    <span class="category-name">IIT-JEE</span>
+                    <span class="category-subtitle">Class 11 | Class 12 | Class 12+</span>
+                </div>
+            </li>
+            <!-- Add more categories here -->
+        </ul>
+
+        <ul id="subcategory-list" style="display: none;">
+            <!-- Subcategories will be dynamically inserted here -->
+        </ul>
+    </div>
+    <button id="back-btn" style="display: none;" onclick="showCategories()">Back to Categories</button>
+
+    <!-- New Responsive Grid Section -->
+    <div class="new-container">
+        <div class="card algorithms">
+            <h2>Algorithms</h2>
+            <p>Searching, Sorting, Dynamic Programming, Bitwi...</p>
+        </div>
+        <div class="card data-structures">
+            <h2>Data Structures</h2>
+            <p>Array, Linked List, Stack, Queue, Binary Tree, etc.</p>
+        </div>
+        <div class="card languages">
+            <h2>Languages</h2>
+            <p>C++, Java, Python, SQL etc.</p>
+        </div>
+        <div class="card quizzes">
+            <h2>Quizzes</h2>
+            <p>C++ Quiz, Java Quiz, Aptitude, DBMS, etc.</p>
+        </div>
+        <div class="card interview-experiences">
+            <h2>Interview Experiences</h2>
+            <p>Latest from Amazon, Google, Adobe, Oracle, Flipkart etc.</p>
+        </div>
+        <div class="card potd">
+            <h2>POTD</h2>
+            <p>New coding challenge everyday</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+<style>
+body {
+    font-family: Poppins, sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #024354, #ffffff);
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.slider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    position: relative;
+}
+
+.desktop-image, .mobile-image {
+    width: 100%;
+    border-radius: 10px;
+    display: none;
+}
+
+.desktop-image {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .desktop-image {
+        display: none;
+    }
+    .mobile-image {
+        display: block;
+    }
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+button {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.dots {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+.desktop-only {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .desktop-only {
+        display: flex;
+    }
+}
+
+.search-container {
+    width: 100%;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: -20px; /* Adjust based on the slider padding */
+}
+
+.container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    flex: 1;
+    margin-top: 20px; /* Adjust based on the slider padding */
+}
+
+.heading {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#category-list, #subcategory-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#category-list li, #subcategory-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+#category-list li .category-info, #subcategory-list li .subcategory-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+}
+
+#category-list li .category-name, #subcategory-list li .subcategory-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#category-list li .category-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    #search-bar {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #category-list li, #subcategory-list li {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+#back-btn {
+    width: calc(100% - 20px);
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Poppins, sans-serif;
+}
+
+#back-btn:hover {
+    background-color: #0056b3;
+}
+
+.new-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1; /* Ensures the card is square */
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.algorithms {
+    background: linear-gradient(to bottom right, #56ccf2, #2f80ed);
+    color: white;
+}
+
+.data-structures {
+    background: linear-gradient(to bottom right, #bb6bd9, #8e44ad);
+    color: white;
+}
+
+.languages {
+    background: linear-gradient(to bottom right, #ff9a9e, #ff6a88);
+    color: white;
+}
+
+.quizzes {
+    background: linear-gradient(to bottom right, #a18cd1, #fbc2eb);
+    color: white;
+}
+
+.interview-experiences {
+    background: linear-gradient(to bottom right, #43cea2, #185a9d);
+    color: white;
+}
+
+.potd {
+    background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .new-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 601px) {
+    .new-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+</style>
+
+<script>
+
+</script>

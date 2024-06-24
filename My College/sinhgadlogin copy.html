@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stylish Login and Registration Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+
+  .modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%; /* Adjusted to fit mobile screen */
+    max-width: 400px;
+    height: 100%; /* Adjusted to fit mobile screen */
+    max-height: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+    animation: animatezoom 0.6s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .imgcontainer {
+    text-align: center;
+    background: #764ba2;
+    padding: 20px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+  }
+
+  img.avatar {
+    width: 80px;
+    border-radius: 50%;
+    border: 1px solid #764ba2;
+  }
+
+  .container {
+    padding: 20px;
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: auto; /* Added to enable scrolling if content exceeds container height */
+  }
+
+  #register-form-step-1{
+    width: 380px;
+    flex-direction: column;
+    max-width:fit-content;
+    justify-content: center;
+   
+    /* Added to enable scrolling if content exceeds container height */
+  }
+
+  #register-form-step-1 input{
+    width: 340px;
+    
+  }
+ 
+  .container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .container input[type=text], .container input[type=password], .container input[type=tel], .container select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .container input[type=checkbox] {
+    margin-top: 16px;
+  }
+
+  .container .psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  .container .register {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  button {
+    background-color:  #764ba2;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #622382;
+  }
+
+  @keyframes animatezoom {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+
+  @media screen and (max-width: 600px) {
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .progress-container {
+    width: 100%;
+    background: #f7f7f7;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  container a{
+    text-decoration: none;
+  }
+
+  .progress-bar {
+    /* width: 50%; */
+    height: 5px;
+    background: #764ba2;
+    transition: width 0.3s;
+  }
+</style>
+</head>
+<body>
+
+<div class="modal-content animate">
+  <div class="imgcontainer">
+    <img src="sinhgad.jpg" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <div class="container" id="login-form">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+    <button type="button" onclick="checkLogin()">Login</button>
+    <input type="checkbox" checked="checked"> Remember me
+
+    <span class="psw">Forgot <a href="#">password?</a></span>
+    <span class="register">Not registered? <a href="#" id="show-register">Create an account</a></span>
+  </div>
+
+  <div class="container hidden" id="register-form-step-1">
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" name="name" required>
+
+    <label for="uname-reg"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname-reg" required>
+
+    <label for="mobile"><b>Mobile Number</b></label>
+    <input type="tel" placeholder="Enter Mobile Number" name="mobile" required>
+
+    <button type="button" id="next-step">Next</button>
+    <span class="register">Already have an account? <a href="#" id="show-login">Login</a></span>
+  </div>
+
+  <div class="container hidden" id="register-form-step-2">
+    <label for="college"><b>College Name</b></label>
+    <select name="college" required>
+      <option value="">Select College</option>
+      <option value="College1">College 1</option>
+      <option value="College2">College 2</option>
+      <option value="College3">College 3</option>
+    </select>
+
+    <label for="branch"><b>College Branch</b></label>
+    <select name="branch" required>
+      <option value="">Select Branch</option>
+      <option value="Branch1">Branch 1</option>
+      <option value="Branch2">Branch 2</option>
+      <option value="Branch3">Branch 3</option>
+    </select>
+
+    <label for="psw-reg"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw-reg" required>
+
+    <label for="psw-confirm"><b>Confirm Password</b></label>
+    <input type="password" placeholder="Confirm Password" name="psw-confirm" required>
+
+    <button type="button" id="previous-step">Back</button>
+    <button type="button" onclick="register()">Register</button>
+    <span class="register">Already have an account? <a href="#" id="show-login">Login</a></span>
+  </div>
+</div>
+
+<script>
+  var showRegisterBtn = document.getElementById('show-register');
+  var showLoginBtn = document.getElementById('show-login');
+  var loginForm = document.getElementById('login-form');
+  var registerFormStep1 = document.getElementById('register-form-step-1');
+  var registerFormStep2 = document.getElementById('register-form-step-2');
+  var nextStepBtn = document.getElementById('next-step');
+  var previousStepBtn = document.getElementById('previous-step');
+  var progressBar = document.getElementById('progress-bar');
+
+  showRegisterBtn.onclick = function() {
+    loginForm.classList.add('hidden');
+    registerFormStep1.classList.remove('hidden');
+    progressBar.style.width = '50%';
+  }
+
+  showLoginBtn.onclick = function() {
+    registerFormStep1.classList.add('hidden');
+    registerFormStep2.classList.add('hidden');
+    loginForm.classList.remove('hidden');
+    progressBar.style.width = '0%';
+  }
+
+  nextStepBtn.onclick = function() {
+    registerFormStep1.classList.add('hidden');
+    registerFormStep2.classList.remove('hidden');
+    progressBar.style.width = '100%';
+  }
+
+  previousStepBtn.onclick = function() {
+    registerFormStep2.classList.add('hidden');
+    registerFormStep1.classList.remove('hidden');
+    progressBar.style.width = '50%';
+  }
+
+
+
+function checkLogin() {
+  var username = document.getElementById('uname').value;
+  var password = document.getElementById('psw').value;
+
+  // Example check (replace with actual authentication logic)
+  if (username === 'user' && password === 'password') {
+    alert('Login successful! Redirecting...');
+
+    // Set login status with expiration time in localStorage
+    var loginTime = new Date().getTime();
+    var expireTime = loginTime + 24 * 60 * 60 * 1000; // 24 hours from now
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('expireTime', expireTime);
+
+    // Redirect to another page
+    window.location.href = 'https://www.geeksforgeeks.org/html-responsive-modal-login-form/'; // Replace with your desired redirect URL
+  } else {
+    alert('Incorrect username or password. Please try again.');
+  }
+}
+
+// Function to check if the user is logged in and the login is not expired
+function checkLoginStatus() {
+  var isLoggedIn = localStorage.getItem('isLoggedIn');
+  var expireTime = localStorage.getItem('expireTime');
+  var currentTime = new Date().getTime();
+
+  if (isLoggedIn === 'true' && currentTime < expireTime) {
+    // Redirect to the desired page if login is still valid
+    window.location.href = 'https://www.geeksforgeeks.org/html-responsive-modal-login-form/'; // Replace with your desired redirect URL
+  }
+}
+
+// Call checkLoginStatus on page load to redirect if already logged in
+checkLoginStatus();
+
+
+</script>
+</body>
+</html>
+
+
+
+

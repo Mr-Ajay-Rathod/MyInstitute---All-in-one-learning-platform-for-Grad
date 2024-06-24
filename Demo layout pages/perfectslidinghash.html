@@ -1,0 +1,149 @@
+
+<div class="container">
+    <div class="header">
+        <h2>Find channels</h2>
+        <a href="#" id="seeAll">See all</a>
+    </div>
+    <div id="sliderSection">
+        <div class="channel-slider">
+            <div class="slider">
+                <div class="channel">
+                    <img src="My College/army.png" alt="ABP News">
+                    <span>ABP News</span>
+                    <button>Follow</button>
+                </div>
+                <div class="channel">
+                    <img src="My College/sinhgad.jpg" alt="WhatsApp">
+                    <span>WhatsApp</span>
+                    <button>Follow</button>
+                </div>
+                <div class="channel">
+                    <img src="My College/dy patil pimpri.jpg" alt="ABP News">
+                    <span>ABP News</span>
+                    <button>Follow</button>
+                </div>
+                <div class="channel">
+                    <img src="My College/dy patil.jpg" alt="WhatsApp">
+                    <span>WhatsApp</span>
+                    <button>Follow</button>
+                </div>
+                <!-- Add more channels as needed -->
+            </div>
+        </div>
+    </div>
+    <div id="allChannels" class="hidden">
+        <h2>Channels</h2>
+        <div class="channels">
+            <div class="channel">
+                <img src="path/to/abp-logo.png" alt="ABP News">
+                <span>ABP News</span>
+                <button>Follow</button>
+            </div>
+            <div class="channel">
+                <img src="path/to/whatsapp-logo.png" alt="WhatsApp">
+                <span>WhatsApp</span>
+                <button>Follow</button>
+            </div>
+            <!-- Add all other channels here -->
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .header h2 {
+        margin: 0;
+    }
+
+    .header a {
+        color: green;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .channel-slider {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+    }
+
+    .slider {
+        display: inline-flex;
+    }
+
+    .channel {
+        display: inline-block;
+        background-color: white;
+        border-radius: 10px;
+        margin-right: 10px;
+        padding: 10px;
+        text-align: center;
+        width: 150px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .channel img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+    }
+
+    .channel span {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .channel button {
+        background-color: #d6ffe6;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        color: green;
+        cursor: pointer;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    #allChannels {
+        padding: 20px;
+        background-color: white;
+    }
+
+    .channels {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .channels .channel {
+        width: calc(33.333% - 10px);
+        box-sizing: border-box;
+    }
+</style>
+
+<script>
+    document.getElementById('seeAll').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('sliderSection').classList.add('hidden');
+        document.getElementById('allChannels').classList.remove('hidden');
+    });
+</script>

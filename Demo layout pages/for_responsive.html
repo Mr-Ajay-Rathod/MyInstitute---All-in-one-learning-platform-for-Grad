@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories and Subcategories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slider-wrapper">
+                <div class="slide desktop">
+                    <img src="" alt="Desktop Image 1" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 1" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 2" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 2" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 3" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 3" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 4" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 4" class="mobile-image">
+                </div>
+            </div>
+            <div class="navigation desktop-only">
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+        </div>
+        <div class="dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+
+  
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+<style>
+    body {
+    font-family: Poppins, sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #024354, #ffffff);
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.slider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    position: relative;
+}
+
+.desktop-image, .mobile-image {
+    width: 100%;
+    border-radius: 10px;
+    display: none;
+}
+
+.desktop-image {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .desktop-image {
+        display: none;
+    }
+    .mobile-image {
+        display: block;
+    }
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+button {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.dots {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+.desktop-only {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .desktop-only {
+        display: flex;
+    }
+}
+
+
+
+</style>
+
+<script>
+let currentIndex = 0;
+let slides = document.querySelectorAll('.slide');
+let totalSlides = slides.length;
+let dots = document.querySelectorAll('.dot');
+let slideInterval;
+
+document.querySelector('.next').addEventListener('click', () => {
+    moveToNextSlide();
+    resetInterval();
+});
+
+document.querySelector('.prev').addEventListener('click', () => {
+    moveToPreviousSlide();
+    resetInterval();
+});
+
+function updateSlidePosition() {
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+    });
+}
+
+function moveToNextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlidePosition();
+}
+
+function moveToPreviousSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlidePosition();
+}
+
+function resetInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(moveToNextSlide, 3000);
+}
+
+function currentSlide(index) {
+    currentIndex = index;
+    updateSlidePosition();
+    resetInterval();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    slideInterval = setInterval(moveToNextSlide, 3000);
+});
+
+</script>
+
+

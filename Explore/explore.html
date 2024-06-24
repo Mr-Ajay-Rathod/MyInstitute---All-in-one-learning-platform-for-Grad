@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Page Categories</title>
+    <link rel="stylesheet" href="explore.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">Select the goal you want...</h1>
+        <p id="description">Exam can be changed at any time later</p>
+        
+        <div id="categories" class="categories">
+            <div class="category" onclick="showOptions('neet')">
+                <h2>NEET</h2>
+                <p>Class 11 | Class 12 | Class 12+</p>
+            </div>
+            <div class="category" onclick="showOptions('iitjee')">
+                <h2>IIT JEE</h2>
+                <p>Class 11 | Class 12 | Class 12+</p>
+            </div>
+            <div class="category" onclick="showOptions('pwonlyias')">
+                <h2>PW OnlyIAS</h2>
+                <p>UPSC | State PSC</p>
+            </div>
+            <div class="category" onclick="showOptions('school')">
+                <h2>School Preparation</h2>
+                <p>Grade 12 | Grade 11 | Foundation (9th to 10th) | Pre-Foundation (3rd to 8th) | Curriculum (Books) | Teacher Training</p>
+            </div>
+            <div class="category" onclick="showOptions('olympiad')">
+                <h2>Olympiad</h2>
+                <p>Government Olympiad | Private Olympiad</p>
+            </div>
+            <div class="category" onclick="showOptions('govtexams')">
+                <h2>Govt. Exams</h2>
+                <p>Banking | SSC | Teaching | Railway | JAIIB & CAIIB | Nursing | Judiciary</p>
+            </div>
+            <div class="category" onclick="showOptions('entranceexam')">
+                <h2>UG & PG Entrance Exam</h2>
+                <p>MBA | IPMAT | IIT Jam & CSIR NET | Law | CUET | UGC NET | Design & Architecture</p>
+            </div>
+            <div class="category" onclick="showOptions('ese')">
+                <h2>ESE GATE & Engineering</h2>
+                <p>ESE | GATE | IAF | IF</p>
+            </div>
+        </div>
+        <div id="options-container" class="categories" style="display: none;">
+            <!-- Options will be dynamically inserted here -->
+        </div>
+        <button id="backButton" onclick="showCategories()" style="display: none;">Back</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+<!-- CSS codes -->
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333333;
+}
+
+p {
+    text-align: center;
+    color: #666666;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.category {
+    flex: 1 1 45%;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category:hover {
+    background-color: #eeeeee;
+}
+
+#options-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: none;
+}
+
+#backButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: #555;
+}
+
+
+</style>
+
+<!-- Javascript codes -->
+<script>
+
+const options = {
+    neet: {
+        11: ["Physics", "Chemistry", "Biology"],
+        12: ["Physics", "Chemistry", "Biology"],
+        "12+": ["Physics", "Chemistry", "Biology"]
+    },
+    iitjee: {
+        11: ["Physics", "Chemistry", "Mathematics"],
+        12: ["Physics", "Chemistry", "Mathematics"],
+        "12+": ["Physics", "Chemistry", "Mathematics"]
+    },
+    pwonlyias: {
+        UPSC: ["Prelims", "Mains"],
+        "State PSC": ["Prelims", "Mains"]
+    },
+    school: {
+        "Grade 12": ["Science", "Commerce", "Arts"],
+        "Grade 11": ["Science", "Commerce", "Arts"],
+        "Foundation (9th to 10th)": ["Science", "Mathematics"],
+        "Pre-Foundation (3rd to 8th)": ["All Subjects"],
+        "Curriculum (Books)": ["Mathematics", "Science", "English"],
+        "Teacher Training": ["Courses"]
+    },
+    olympiad: {
+        "Government Olympiad": ["Math Olympiad", "Science Olympiad"],
+        "Private Olympiad": ["Math Olympiad", "Science Olympiad"]
+    },
+    govtexams: {
+        Banking: ["PO", "Clerk"],
+        SSC: ["CGL", "CHSL"],
+        Teaching: ["TET", "CTET"],
+        Railway: ["Group D", "NTPC"],
+        "JAIIB & CAIIB": ["JAIIB", "CAIIB"],
+        Nursing: ["AIIMS", "JIPMER"],
+        Judiciary: ["Civil Judge", "District Judge"]
+    },
+    entranceexam: {
+        MBA: ["CAT", "MAT", "XAT"],
+        IPMAT: ["IPMAT Indore", "IPMAT Rohtak"],
+        "IIT Jam & CSIR NET": ["Physics", "Chemistry", "Mathematics"],
+        Law: ["CLAT", "AILET"],
+        CUET: ["UG", "PG"],
+        "UGC NET": ["Commerce", "Management", "Economics"],
+        "Design & Architecture": ["NID", "NIFT", "CEED"]
+    },
+    ese: {
+        ESE: ["Mechanical", "Civil", "Electrical"],
+        GATE: ["Mechanical", "Civil", "Electrical"],
+        IAF: ["Technical", "Non-Technical"],
+        IF: ["Technical", "Non-Technical"]
+    }
+};
+
+function showOptions(category) {
+    const categoriesContainer = document.getElementById('categories');
+    const optionsContainer = document.getElementById('options-container');
+    const backButton = document.getElementById('backButton');
+    const title = document.getElementById('title');
+    const description = document.getElementById('description');
+
+    categoriesContainer.style.display = 'none'; // Hide the main categories
+    optionsContainer.innerHTML = ""; // Clear previous options
+    optionsContainer.style.display = 'flex'; // Show the options container
+    backButton.style.display = 'block'; // Show the back button
+
+    title.textContent = "Select the class you are in...";
+    description.textContent = ""; // Clear description text
+
+    for (const key in options[category]) {
+        const optionElement = document.createElement('div');
+        optionElement.className = 'category';
+        optionElement.textContent = key;
+        optionElement.onclick = () => showSubOptions(category, key);
+        optionsContainer.appendChild(optionElement);
+    }
+}
+
+function showSubOptions(category, subcategory) {
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = ""; // Clear previous options
+
+    for (const option of options[category][subcategory]) {
+        const optionElement = document.createElement('div');
+        optionElement.className = 'category';
+        optionElement.textContent = option;
+        optionsContainer.appendChild(optionElement);
+    }
+}
+
+function showCategories() {
+    const categoriesContainer = document.getElementById('categories');
+    const optionsContainer = document.getElementById('options-container');
+    const backButton = document.getElementById('backButton');
+    const title = document.getElementById('title');
+    const description = document.getElementById('description');
+
+    categoriesContainer.style.display = 'flex'; // Show the main categories
+    optionsContainer.style.display = 'none'; // Hide the options container
+    backButton.style.display = 'none'; // Hide the back button
+
+    title.textContent = "Select the goal you want...";
+    description.textContent = "Exam can be changed at any time later"; // Reset description text
+}
+
+</script>

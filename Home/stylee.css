@@ -1,0 +1,405 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3rem;
+
+  /*========== Colors ==========*/
+  --hue: 174;
+  --sat: 63%;
+  --first-color: hsl(var(--hue), var(--sat), 40%);
+  --first-color-alt: hsl(var(--hue), var(--sat), 36%);
+  --title-color: hsl(var(--hue), 12%, 15%);
+  --text-color: hsl(var(--hue), 8%, 35%);
+  --body-color: hsl(var(--hue), 100%, 99%);
+  --container-color: #FFF;
+
+  /*========== Font and typography ==========*/
+  --body-font: 'poppins', sans-serif;
+  --h1-font-size: 1.5rem;
+  --normal-font-size: .938rem;
+  --tiny-font-size: .625rem;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+
+
+
+
+
+body{
+    font-family: 'poppins', sans-serif;
+
+    color : var(--primary-text-color);
+}
+
+h1{
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+P{
+    font-family: 'poppins', sans-serif;
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+    line-height: 1.8rem;
+}
+
+a{
+   text-decoration: none;
+   display: inline-block;
+
+}
+
+ul{
+    list-style: none;
+}
+ 
+/* utility classes */
+
+.containeres {
+
+/* centre me aa jayega */
+    max-width: 1180px;    
+    margin-inline : auto ;
+    padding-inline:var(--padding-inline-section) ;
+    overflow: hidden;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.hover-links {
+    color: var(--primary-text-color);
+
+}
+
+.hover-links:hover{
+    color: var(--accent-color);
+    transition: 0.2s ease-out;
+} 
+
+
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: var(--header-height) 0 0 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.section {
+  /* padding: 4.5rem 0 2rem; */
+}
+
+.section__title {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+
+/*=============== LAYOUT ===============*/
+.containeres {
+  max-width: 1180px;
+  /* margin-left: 1rem; */
+  /* margin-right: 1rem; */
+}
+
+/*=============== HEADER ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--container-color);
+  z-index: var(--z-fixed);
+  transition: .4s;
+}
+
+/*=============== NAV ===============*/
+.nav {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__img {
+  width: 32px;
+  border-radius: 50%;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  font-weight: 600;
+  width: 10vw;
+}
+
+
+.nav__list, 
+.nav__link {
+  display: flex;
+}
+
+.nav__link {
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4px;
+  color: var(--title-color);
+  font-weight: 600;
+  /* background-color: rgb(219, 223, 223);
+  padding: 5px 15px;
+  border-radius: 20px */
+}
+
+.nav__list {
+  justify-content: space-around;
+}
+
+
+
+.nav__name {
+  font-size: var(--tiny-font-size);
+  /* display: none;*/ /* Minimalist design, hidden labels */
+}
+
+.nav__icon {
+  font-size: 1.5rem;
+}
+
+/*Active link*/
+.active-link {
+  position: relative;
+  color: var(--first-color);
+  transition: .3s;
+}
+
+
+
+/* header section */
+
+
+
+.header-section{
+    justify-content: center;
+    gap: 50px;
+}
+
+.header-left{
+    max-width: 45vw;
+}
+
+.header-left h1 {
+    margin-top: 20px;
+    max-width: 350px;
+}
+
+
+.header-right img {
+    width:400px;
+
+    
+}
+
+
+/* univeristy section  */
+
+.unitab .unitab-img{
+  overflow: auto;
+  white-space: nowrap;
+text-align: center;
+align-items: center;
+}
+
+
+.unitab-img::-webkit-scrollbar{
+  -webkit-appearance: none;
+}
+.unitab .unitab-img img{
+  height: 50px;
+margin: 0 40px;
+}
+
+.logosuni{
+  overflow: hidden;
+  white-space: nowrap;
+text-align: center;
+align-items: center;
+
+}
+
+.headingclass{
+  
+  margin: 5% 0 2% 0 ;
+  align-items: center;
+  text-align: center;
+
+}
+.listofuni{
+  display: inline-block;
+  animation: 30s slide infinite linear;
+}
+.listofuni img{
+height: 50px;
+margin: 0 40px;
+}
+
+@keyframes slide {
+  from{
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+  
+}
+
+
+.listofunireturn{
+  display: inline-block;
+  animation: 15s slide infinite linear;
+}
+.listofunireturn img{
+height: 50px;
+margin: 0 40px;
+}
+
+/* button */
+
+.mainbuttom{
+  margin: 20px auto;
+  text-align: center;
+  text-decoration: none ;
+}
+
+.mainbuttom a {
+  padding: 10px 15px;
+  border: 1px solid #575656;
+  border-radius: 20px;
+  color: rgb(30, 27, 27);
+
+}
+
+.mainbuttom a:hover{
+
+  color: rgb(58, 126, 203);
+
+}
+
+/* exam catergories  */
+
+
+.firstinner
+{
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+}
+
+.firstinner .items {
+  background-color: rgb(216, 223, 228);
+  border-radius: 25px;
+  padding: 4px 15px;
+  margin: 10px ;
+}
+
+
+
+/* big feature sectoin */
+
+.big-feature-section {
+    padding: 30px var(--padding-inline-section);
+}
+
+.big-feature-container{
+    gap: 30px;
+}
+
+
+.feature-img img{
+    width: 400px;
+}
+.feature-desc {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#second-big-feature{
+    flex-direction: row-reverse;
+}
+
+
+
+
+
+
+/* Minimalist design, active link */
+/* .active-link::before{
+  content: '';
+  position: absolute;
+  bottom: -.5rem;
+  width: 4px;
+  height: 4px;
+  background-color: var(--first-color);
+  border-radius: 50%;
+} */
+
+/* Change background header */
+.scroll-header {
+  box-shadow: 0 1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
+}
+
+/*=============== MEDIA QUERIES ===============*/
+/* For small devices */
+/* Remove if you choose, the minimalist design */
+
+
+
+
+
+
+
+
+

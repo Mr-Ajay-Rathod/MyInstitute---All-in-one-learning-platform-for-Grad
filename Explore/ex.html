@@ -1,0 +1,225 @@
+
+    <div> 
+    <div class="search-container">
+        <span class="heading">Select the goal you want... </span>
+           
+        </div>
+
+    <div class="container">
+        <ul id="category-list">
+            <li onclick="showOptions('neet')">
+                <div class="category-info">
+                    <span class="category-name">NEET</span>
+                    <span class="category-subtitle">Class 11 | Class 12 | Class 12+</span>
+                </div>
+            </li>
+            <li onclick="showOptions('iitjee')">
+                <div class="category-info">
+                    <span class="category-name">IIT-JEE</span>
+                    <span class="category-subtitle">Class 11 | Class 12 | Class 12+</span>
+                </div>
+            </li>
+            <!-- Add more categories here -->
+        </ul>
+
+        <ul id="subcategory-list" style="display: none;">
+            <!-- Subcategories will be dynamically inserted here -->
+        </ul>
+    </div>
+    <button id="back-btn" style="display: none;" onclick="showCategories()">Back to Categories</button>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+<style>
+    /* styles.css */
+body {
+    font-family: Poppins, sans-serif;
+    background-color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.search-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    padding: 95px 10px 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.heading {
+    width: 100%;
+    /* padding: 10px; */
+    font-size: 1.1rem;
+    /* font-weight:bold; */
+    /* border: 2px solid #ffffff; */
+    /* border-radius: 10px; */
+    /* margin-top:10px; */
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    /* padding-left: 40px; */
+    background-size: 20px;
+}
+
+#category-list, #subcategory-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#category-list li, #subcategory-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+#category-list li .category-info, #subcategory-list li .subcategory-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+}
+
+#category-list li .category-name, #subcategory-list li .subcategory-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#category-list li .category-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    #search-bar {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #category-list li, #subcategory-list li {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+#back-btn {
+    width: calc(100% - 20px);
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Poppins, sans-serif;
+}
+
+#back-btn:hover {
+    background-color: #0056b3;
+}
+
+</style>
+
+<script>
+const options = {
+    neet: ["11", "12", "12+"],
+    iitjee: ["11", "12", "12+"],
+    // Add other categories here
+};
+
+const subOptions = {
+    neet: {
+        11: ["Physics", "Chemistry", "Biology"],
+        12: ["Physics", "Chemistry", "Biology"],
+        "12+": ["Physics", "Chemistry", "Biology"]
+    },
+    iitjee: {
+        11: ["Physics", "Chemistry", "Mathematics"],
+        12: ["Physics", "Chemistry", "Mathematics"],
+        "12+": ["Physics", "Chemistry", "Mathematics"]
+    },
+    // Add other subcategories here
+};
+
+function showOptions(category) {
+    const categoryList = document.getElementById('category-list');
+    const subcategoryList = document.getElementById('subcategory-list');
+    const backBtn = document.getElementById('back-btn');
+
+    categoryList.style.display = 'none';
+    subcategoryList.innerHTML = ""; // Clear previous subcategories
+
+    options[category].forEach(subcategory => {
+        const li = document.createElement('li');
+        li.innerHTML = `<div class="subcategory-info"><span class="subcategory-name">${subcategory}</span></div>`;
+        li.onclick = () => showSubOptions(category, subcategory);
+        subcategoryList.appendChild(li);
+    });
+
+    subcategoryList.style.display = 'block';
+    backBtn.style.display = 'block';
+}
+
+function showSubOptions(category, subcategory) {
+    const subcategoryList = document.getElementById('subcategory-list');
+    subcategoryList.innerHTML = ""; // Clear previous options
+
+    subOptions[category][subcategory].forEach(option => {
+        const li = document.createElement('li');
+        li.innerHTML = `<div class="subcategory-info"><span class="subcategory-name">${option}</span></div>`;
+        subcategoryList.appendChild(li);
+    });
+}
+
+function showCategories() {
+    const categoryList = document.getElementById('category-list');
+    const subcategoryList = document.getElementById('subcategory-list');
+    const backBtn = document.getElementById('back-btn');
+
+    if (subcategoryList.style.display === 'block') {
+        subcategoryList.style.display = 'none';
+        categoryList.style.display = 'block';
+    } else {
+        categoryList.style.display = 'block';
+        backBtn.style.display = 'none';
+    }
+}
+
+</script>
+
+</div>
+

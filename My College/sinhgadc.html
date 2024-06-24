@@ -1,0 +1,3176 @@
+
+<!DOCTYPE html>
+    <html lang="en">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--=============== BOXICONS ===============-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+        <!--=============== CSS ===============-->
+ 
+        <title>Responsive bottom navigation</title>
+    </head>
+
+
+<body>
+
+        <!--=============== Navbar Header ===============-->
+<div>
+        <style>
+
+            /*=============== GOOGLE FONTS ===============*/
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+        @import url("https://fonts.googleapis.com/css2?family=Sacramento&display=swap");
+        
+        /*=============== VARIABLES CSS ===============*/
+        :root {
+          --header-height: 3rem;
+        
+          /*========== Colors ==========*/
+          --hue: 174;
+          --sat: 63%;
+          --first-color: #595bd4;
+          --first-color-alt: hsl(var(--hue), var(--sat), 36%);
+          --title-color: hsl(var(--hue), 12%, 15%);
+          --text-color: hsl(var(--hue), 8%, 35%);
+          --body-color: hsl(var(--hue), 100%, 99%);
+          --container-color: #FFF;
+        
+          /*========== Font and typography ==========*/
+          --body-font: 'poppins', sans-serif;
+          --h1-font-size: 1.5rem;
+          --normal-font-size: .638rem;
+          --tiny-font-size: .600rem;
+    
+          /*========== z index ==========*/
+          --z-tooltip: 10;
+          --z-fixed: 100;
+        }
+        
+        
+        
+        body{
+            font-family: 'poppins', sans-serif;
+        
+            color : var(--primary-text-color);
+        
+            background-color: #f0f0f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        h1{
+            font-size: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        P{
+            font-family: 'poppins', sans-serif;
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            line-height: 1.8rem;
+        }
+        
+        a{
+           text-decoration: none;
+           display: inline-block;
+        
+        }
+        
+        ul{
+            list-style: none;
+        }
+         
+        /* utility classes */
+        
+        .containeres {
+        
+        /* centre me aa jayega */
+            max-width: 95%;    
+            margin-inline : auto ;
+            padding-inline:var(--padding-inline-section) ;
+            overflow: hidden;
+        
+        }
+        
+        
+        /*=============== HEADER ===============*/
+        .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background-color: var(--container-color);
+          z-index: var(--z-fixed);
+          transition: .4s;
+          box-shadow: 0 1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
+        }
+        
+        /*=============== NAV ===============*/
+        .nav {
+          height: var(--header-height);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .nav__img {
+          width: 32px;
+          border-radius: 50%;
+        }
+        
+        .nav__logo {
+          color: var(--title-color);
+          font-weight: 600;
+          width: 230px;
+          margin-left: -50px;
+        }
+        
+        
+        .nav__list, 
+        .nav__link {
+          display: flex;
+          align-items: center;
+        }
+
+        .nav__list a{
+            text-decoration: none;
+        }
+        
+        .nav__link {
+          flex-direction: column;
+          align-items: center;
+          row-gap: 4px;
+          color: var(--title-color);
+          font-weight: 600;
+           /* background-color: rgb(219, 223, 223); */
+          /* padding: 5px 15px; */
+          /* border-radius: 20px */ 
+        }
+        
+        .nav__list {
+          justify-content: space-around;
+          padding:0px;
+        }
+        
+
+
+        
+        .nav__name {
+          font-size: var(--tiny-font-size);
+          /* display: none;*/ /* Minimalist design, hidden labels */
+        }
+        
+        .nav__icon {
+          font-size: 1.5rem;
+        }
+        
+        /*Active link*/
+        .active-link {
+          position: relative;
+          color: var(--first-color);
+          transition: .3s;
+        }
+        
+        
+        /* Change background header */
+        .scroll-header {
+          box-shadow: 0 1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
+        }
+        
+        
+        </style> 
+
+
+        <header class="header" id="header">
+            <nav class="nav containeres">
+          <img src="sinhgadlogo.jpg" alt="" class="nav__logo">
+          <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="#" id="btn_ftr" class="nav__link active-link">
+                        <i class='bx bxs-home-smile nav__icon'></i>
+                        <span class="nav__name">Home</span>
+                    </a>
+                </li>
+             
+            
+                <li class="nav__item">
+                    <a href="#"  id="btn_exp" class="nav__link">
+                        <i class='bx bx-search-alt nav__icon'></i>
+                        <span class="nav__name">Explore</span>
+                    </a>
+                </li>
+
+
+                <li class="nav__item">
+                    <a href="#" id="btn_exam" class="nav__link">
+                        <i class='bx bxs-book-reader nav__icon'></i>
+                        <span class="nav__name">Exam</span>
+                    </a>
+                </li>
+
+
+
+                <li class="nav__item">
+                    <a href="#" id="btn_ntfn" class="nav__link">
+                        <i class='bx bxs-notification nav__icon'></i>
+                        <span class="nav__name">Natification</span>
+                    </a>
+                </li>
+
+
+                <li class="nav__item">
+                    <a href="#" id="btn_jbs" class="nav__link">
+                        <i class='bx bxs-briefcase nav__icon'></i>
+                        <span class="nav__name">jobs</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+            </nav>
+        </header>
+
+</div> 
+
+
+<br>
+
+<!-- featured -->
+
+<div id="ftr" id="ftr"> 
+
+    <!-- main Slider  -->
+    
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slider-wrapper">
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 1" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 1" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 2" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 2" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 3" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 3" class="mobile-image">
+                </div>
+                <div class="slide desktop">
+                    <img src="dek.webp" alt="Desktop Image 4" class="desktop-image">
+                    <img src="mobile.webp" alt="Mobile Image 4" class="mobile-image">
+                </div>
+            </div>
+            <div class="navigation desktop-only">
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+        </div>
+        <div class="dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+    
+    
+    <style>
+    
+    
+    .slider-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        background: #ffffff;
+        padding: 35px 0 5px 0;
+        box-sizing: border-box;
+    }
+    
+    .slider {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .slider-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+        padding: 0 10px;
+        position: relative;
+    }
+    
+    .desktop-image, .mobile-image {
+        width: 100%;
+        border-radius: 10px;
+        display: none;
+    }
+    
+    .desktop-image {
+        display: block;
+        margin: 20px 0;
+    }
+    
+    
+    
+    .navigation {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+    }
+    
+    button {
+        background-color: rgba(0,0,0,0.5);
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 10px;
+    }
+    
+   
+    .dots {
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .dot {
+        height: 8px;
+        width: 8px;
+        margin: 0 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+    
+    .dot.active {
+        background-color: #717171;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    </style>
+    
+    <!-- thing placement thing sinhgad heading -->
+    <div> 
+    
+    <div class="places-container containeres">
+        <h1>Thing Placement, Thing Sinhgad</h1>
+    </div>
+    
+    <style>
+        .places-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin:20px;
+            text-align: center;
+        }
+    
+    
+        .places-container h1 {
+            font-family: "Sacramento", cursive;
+            font-weight: 800;
+            font-size: 40px;
+            color: #86839d;
+        }
+    </style>
+    </div>
+    
+    
+    
+    
+    <!-- heading  -->
+    
+    <div class="heading-container containeres">
+        <h1>OUR PLACED STUDENTS</h1>
+    </div>
+    <style>
+        .heading-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin:20px;
+        }
+    
+        .heading-container::before,
+        .heading-container::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #cccccc;
+            margin: 0 10px;
+        }
+    
+        .heading-container h1 {
+    
+            margin: 0;
+            font-weight: normal;
+            font-size: 15px;
+            color: #666666;
+        }
+    </style>
+    
+    <!-- students list  -->
+     <div>
+        <style>
+          
+    
+            .header01 h2 {
+                margin: 0;
+                font-size: 20px;
+            }
+    
+    
+            .channel-slider01 {
+                overflow: hidden;
+                white-space: nowrap;
+                padding-bottom: 10px;
+            }
+    
+    
+            .slider01 {
+                display: inline-flex;
+            }
+    
+            .slider-left-right {
+                animation: slide-left-right 20s linear infinite;
+            }
+    
+            .slider-right-left {
+                animation: slide-right-left 20s linear infinite;
+            }
+    
+            @keyframes slide-left-right {
+                0% { transform: translateX(0%); }
+                100% { transform: translateX(-50%); }
+            }
+    
+            @keyframes slide-right-left {
+                0% { transform: translateX(-50%); }
+                100% { transform: translateX(0%); }
+            }
+    
+            .channel01 {
+                display: inline-block;
+                background-color: white;
+                background: linear-gradient(to bottom right, #c1a5fd, #ffffff);
+                border-radius: 10px;
+                margin-right: 10px;
+                padding: 10px;
+                text-align: center;
+                width: 150px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+    
+            .channel01 img {
+                width: 60%;
+                height: 60%px;
+                border-radius: 50%;;
+                margin-bottom: 10px;
+                
+            }
+    
+            .channel01 span {
+                display: block;
+                margin-bottom: 0px 0px 10px;
+                font-size: 13px;
+            }
+    
+            .channel01 button {
+                background-color: #d6ffe6;
+                border: none;
+                padding: 3px 15px;
+                font-size: 0.9rem;
+                border-radius: 50px;
+                color: rgb(48, 48, 48);
+                cursor: pointer;
+                margin-bottom: 6px;
+            }
+    
+            .hidden01 {
+                display: none;
+            }
+    
+        
+    
+            .channels01 {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+    
+            .channels01 .channel01 {
+                width: calc(33.333% - 10px);
+                box-sizing: border-box;
+            }
+        </style>
+    
+        <div class="container01 containeres">
+       
+            <div id="sliderSection01">
+                <div class="channel-slider01">
+                    <div class="slider01 slider-left-right">
+                        <div class="channel01">
+                            <img src="image.png" alt="D.Y. Patil Institute">
+                            <span>Rahul Rathod</span>
+                            <span>TCS</span>
+                            <span>CTC : 4.6 LPA</span>
+    
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        
+                        <!-- Duplicate channels to create continuous effect -->
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                    </div>
+                    <div class="slider01 slider-left-right">
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <!-- Duplicate channels to create continuous effect -->
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="channel-slider01">
+                    <div class="slider01 slider-right-left">
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <!-- Duplicate channels to create continuous effect -->
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                    </div>
+                    <div class="slider01 slider-right-left">
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <!-- Duplicate channels to create continuous effect -->
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                    </div>
+                    <div class="slider01 slider-right-left">
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <!-- Duplicate channels to create continuous effect -->
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+    
+                         <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <!-- Duplicate channels to create continuous effect -->
+                        <div class="channel01">
+                            <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                            <span>D.Y. Patil Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="sinhgad.jpg" alt="Sinhgad Institute">
+                            <span>Sinhgad Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="army.png" alt="Army Institute">
+                            <span>Army Institute</span>
+                            <button>Explore</button>
+                        </div>
+                        <div class="channel01">
+                            <img src="aissms.jpg" alt="AISSMS Institute">
+                            <span>AISSMS Institute</span>
+                            <button>Explore</button>
+                        </div>
+                    </div>
+                   
+                  
+                </div>
+            </div>
+    
+        </div>
+    
+        <script>
+            document.getElementById('seeAll01').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('sliderSection01').classList.add('hidden01');
+                document.getElementById('allChannels01').classList.remove('hidden01');
+            });
+        </script>
+    </div>
+    
+    
+    
+    <!-- heading  -->
+    <div class="heading-container containeres">
+        <h1>Current Hiring Companies</h1>
+    </div>
+    
+    <!-- All Companies hiring Details  -->
+    
+    <div>
+        
+     <style>
+              
+        
+           
+        
+                .header015 h2 {
+                    margin: 0;
+                    font-size: 20px;
+                }
+        
+        
+                .channel-slider015 {
+                    /* overflow: hidden; */
+                    overflow-x: auto;
+                    white-space: nowrap; 
+                    -webkit-overflow-scrolling:touch;
+                    white-space: nowrap;
+                    padding-bottom: 10px;
+                }
+        
+        
+                .slider015 {
+                    display: inline-flex;
+                }
+         
+        
+                .channel015 {
+                    display: inline-block;
+                    background-color: white;
+                    border-radius: 10px;
+                    margin-right: 10px;
+                    padding: 10px;
+                    text-align: center;
+                    width: 150px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+        
+                .channel015 img {
+                    width: 50px;
+                    height: 50px;
+                    margin-bottom: 10px;
+                }
+        
+                .channel015 span {
+                    display: block;
+                    margin-bottom: 10px;
+                    font-size: 15px;
+                }
+        
+                .channel015 button {
+                    background-color: #595bd4;
+                    border: none;
+                    padding: 3px 15px;
+                    font-size: 0.9rem;
+                    border-radius: 50px;
+                    color: rgb(255, 255, 255);
+                    cursor: pointer;
+                    margin-bottom: 6px;
+                }
+    
+                .channel015 button:hover { 
+                    transform: scale(1.05);
+    
+                }
+    
+        
+                .hidden015 {
+                    display: none;
+                }
+        
+                #allChannels015 {
+                    padding: 20px;
+                    background-color: white;
+                }
+        
+                .channels015 {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+        
+                .channels015 .channel015 {
+                    width: calc(33.333% - 10px);
+                    box-sizing: border-box;
+                }
+     </style>
+        
+    <div class="container015 containeres">  
+        
+        <div class="Find_all">
+            <h4 style="font-size: 1rem; margin-top: 3px;">On-Campus Companies</h4>
+            <a href="#" id="seeAll01">Show all</a>
+    
+            <style>
+    
+             .Find_all {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                align-items: center;
+                text-align: center;
+            } 
+    
+            .Find_all a{
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 15px;
+            }
+            
+            </style>
+            
+    
+    
+    
+        </div>
+    
+        <div id="sliderSection015">
+                    <div class="channel-slider015">
+                        <div class="slider015 slider-left-right15">
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+    
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+    
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+    
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+                            
+                            <div class="channel015">
+                                <img src="dy patil pimpri.jpg" alt="D.Y. Patil Institute">
+                                <span>TCS</span>
+                                <span style="color: #8a8a8a; font-size: 10px;">129+ student Placed</span>
+    
+                                <button>Explore</button>
+                            </div>
+                        </div>
+                     
+                    </div>
+         </div>
+    
+               
+     </div>
+     </div>
+    
+    
+    
+    <!-- heading  -->
+    <div class="heading-container containeres">
+        <h1>WANT TO PREPARE 4 PLACEMENT?</h1>
+    </div>
+    
+    
+    <!-- Placement box -->
+     <div> 
+    <div>
+        <div class="container001 containeres">
+    
+            <div class="card001 data-structures001">
+                <span>Aptitude Test</span>
+                <p style="font-size:0.5rem; line-height:10px; margin-top: 10px;">Array, Linked List, Stack, Queue, Binary Tree, etc.</p>
+            </div>
+    
+            <div class="card001 quizzes001">
+                <span>Coding Round</span>
+                <!-- <p>C++ Quiz, Java Quiz, Aptitude, DBMS, etc.</p> -->
+            </div>
+            <div class="card001 interview-experiences001">
+                <span>Technical Round</span>
+                <!-- <p>Latest from Amazon, Google, Adobe, Oracle, Flipkart etc.</p> -->
+            </div>
+            <div class="card001 potd001">
+                <span>Interview</span>
+                <!-- <p>New coding challenge everyday</p> -->
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <style>
+    
+    .container001 {
+        max-width: 100%;
+        display: flex;
+       height: auto;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .card001 {
+        width: 120px;
+        height: 120px;
+        background-color: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* text-align: center; */
+        aspect-ratio: 1 / 1;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        /* align-items: center; */
+       margin: 7px;
+    }
+    
+    .card001 span {
+        margin-top: 0;
+        font-weight: 500;
+        line-height: 17px;
+        
+    }
+    
+    .algorithms001 {
+        background: linear-gradient(to bottom right, #56ccf2, #2f80ed);
+        color: white;
+    }
+    
+    .data-structures001 {
+        background: linear-gradient(to bottom right, #bb6bd9, #8e44ad);
+        color: white;
+    }
+    
+    .languages001 {
+        background: linear-gradient(to bottom right, #ff9a9e, #ff6a88);
+        color: white;
+    }
+    
+    .quizzes001 {
+        background: linear-gradient(to bottom right, #a18cd1, #fbc2eb);
+        color: white;
+    }
+    
+    .interview-experiences001 {
+        background: linear-gradient(to bottom right, #43cea2, #185a9d);
+        color: white;
+    }
+    
+    .potd001 {
+        background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+        color: white;
+    }
+    
+    .responsive-image {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+    
+    @media (max-width: 600px) {
+    
+    .card001 {
+        width: 150px;
+        height: 150px;
+    }
+    
+        .container001 {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    @media (min-width: 601px) {
+    
+        .card001 {
+        width: 23%;
+        height: 120px;
+    }
+        .container001 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+    
+    </style>
+    </div>
+    
+    
+    <!-- heading  -->
+    <div class="heading-container containeres">
+        <h1>Top Courses</h1>
+    </div>
+    
+    
+    <!-- top courses  -->
+    <div> 
+    <style>
+        .container4 {
+            width: 100%;
+           
+            position: relative;
+            overflow: hidden;
+            /* background: #fff; */
+            /* padding: 20px; */
+            /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+            /* border-radius: 10px; */
+            margin-bottom: 10px;
+        }
+    
+        .slider-container4 {
+            overflow: hidden;
+        }
+    
+        .slider4 {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+    
+        .slide4 {
+            min-width: 80%;
+            margin-right: 10%;
+            overflow: hidden;
+            /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .slide4 img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    
+        .details4 {
+            padding: 10px;
+            width: 100%;
+        }
+    
+        .details4 p {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.2;
+            font-weight: 500;
+    
+        }
+    
+        .prev4, .next4 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+        }
+    
+        .prev4 {
+            left: 10px;
+        }
+    
+        .next4 {
+            right: 10px;
+        }
+    
+        /* Show buttons on larger screens */
+        @media (min-width: 768px) {
+            .prev4, .next4 {
+                display: block;
+            }
+    
+            .slide4 {
+                min-width: 30%;
+                margin-right: 2.5%;
+            }
+        }
+    
+        @media (min-width: 1024px) {
+            .slide4 {
+                min-width: 40%;
+                margin-right: 2.5%;
+            }
+        }
+    
+    </style>
+    
+    <div class="container4 containeres">
+        <div class="slider-container4">
+            <div class="slider4">
+                <div class="slide4">
+                    <img class="images4" src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+    
+                <div class="slide4">
+                    <img src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+    
+                <div class="slide4">
+                    <img src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+                <!-- Add more slides as needed -->
+            </div>
+        </div>
+        <button class="prev4" onclick="slide4(-1)">&#10094;</button>
+        <button class="next4" onclick="slide4(1)">&#10095;</button>
+    
+    <!-- see all button  -->
+    
+    
+        <div class="show_all">
+            <!-- <h2>Find channels</h2> -->
+            <a href="#" id="seeAllcourse" ">See all Courses</a>
+        </div>
+    </div>
+    <style>  
+    .show_all{
+        justify-content:center;
+        text-align: center;
+    }
+
+    .show_all a{
+        text-decoration: none;
+    }
+    </style>
+  
+    <script>
+        let currentSlide4 = 0;
+        const slider4 = document.querySelector('.slider4');
+        const slides4 = document.querySelectorAll('.slide4');
+        const totalSlides4 = slides4.length;
+    
+        function slide4(direction) {
+            currentSlide4 += direction;
+    
+            if (currentSlide4 < 0) {
+                currentSlide4 = totalSlides4 - 1;
+            } else if (currentSlide4 >= totalSlides4) {
+                currentSlide4 = 0;
+            }
+    
+            slider4.style.transform = `translateX(${-currentSlide4 * (slides4[0].clientWidth + 20)}px)`;
+        }
+    
+        // Touch events for mobile sliding
+        let startX4 = null;
+    
+        slider4.addEventListener('touchstart', (e) => {
+            startX4 = e.touches[0].clientX;
+        });
+    
+        slider4.addEventListener('touchmove', (e) => {
+            if (!startX4) return;
+            const endX4 = e.touches[0].clientX;
+            const diff4 = startX4 - endX4;
+    
+            if (diff4 > 50) {
+                slide4(1);
+                startX4 = null;
+            } else if (diff4 < -50) {
+                slide4(-1);
+                startX4 = null;
+            }
+        });
+    </script>
+    
+    </div>
+    
+
+    </main>
+
+
+<br>
+<br>
+<br>
+
+<!-- external media queary -->
+<div> 
+<style> 
+
+@media screen and (max-width : 991px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+ 
+        .nav__logo {
+         
+            width: 180px;
+            margin: auto;
+          }
+
+          .nav__menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: var(--container-color);
+      box-shadow: 0 -1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
+      width: 100%;
+      height: 3.5rem;
+      padding: 15px 0 0 0;
+      display: grid;
+      align-content: center;
+      transition: .4s;
+    }
+  
+ 
+
+  
+  }
+
+
+@media screen and (max-width : 479px) {
+    :root {
+        
+        --padding-inline-section : 10px ;
+
+    }
+    
+    h1 {
+
+        font-size: 2rem;
+    }
+
+    h2 {
+
+        font-size: 1.5rem;
+    }
+    P{
+            font-size: 1rem;
+    }
+
+   .features-card {
+     min-width: 100px ;
+ }
+
+.examples-card {
+    width: 100%;
+}
+
+
+.nav__logo {
+             
+    margin-left: auto;
+  }
+
+}
+
+
+  @media screen and (min-width: 968px) {
+    :root {
+      --h1-font-size: 2.25rem;
+      --normal-font-size: 1rem;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+
+  
+    .nav__menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: var(--container-color);
+      box-shadow: 0 -1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
+      width: 100%;
+      height: 3.5rem;
+      padding: 15px 0 0 0;
+      display: grid;
+      align-content: center;
+      transition: .4s;
+    }
+
+  }
+  
+  
+  @media screen and (max-width: 320px) {
+    .nav__name {
+      display: none;
+    }
+
+    .nav__menu .nav__logo {
+        width:5vw;
+    }
+  }
+  
+  /* For medium devices */
+  @media screen and (min-width: 576px) {
+    .nav__list {
+         padding:0px;
+      justify-content: center;
+      column-gap: 3rem;
+    }
+
+
+  
+  }
+  
+  @media screen and (min-width: 767px) {
+
+  
+    .section {
+      padding: 10rem 0 5rem;
+    }
+    .nav {
+      height: calc(var(--header-height) + 1.5rem); /* 4.5rem */
+    }
+    .nav__img {
+      display: none;
+    }
+
+   .nav__link{
+    flex-direction:row;
+   }
+
+   .nav__icon{
+    margin-right: 10px;
+   }
+
+    }
+    .nav__name {
+      font-size: var(--normal-font-size);
+      /* display: block; */ /* Minimalist design, visible labels */
+    }
+ 
+  
+    /* First design, remove if you choose the minimalist design */
+
+    /* Minimalist design */
+    /* .active-link::before{
+        bottom: -.75rem;
+    } */
+  
+  
+  /* For large devices */
+  @media screen and (min-width: 1024px) {
+    .containeres {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
+
+    .desktop-only {
+        display: flex;
+    }
+  }
+  
+  
+@media (max-width: 1024px) {
+    .desktop-image {
+        display: none;
+    }
+    .mobile-image {
+        display: block;
+    }
+}
+
+
+
+</style>
+
+
+<script> 
+
+/*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+const sections = document.querySelectorAll('section[id]')
+
+function scrollActive(){
+    const scrollY = window.pageYOffset
+
+    sections.forEach(current =>{
+        const sectionHeight = current.offsetHeight,
+            sectionTop = current.offsetTop - 50,
+            sectionId = current.getAttribute('id')
+
+        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
+        }else{
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
+        }
+    })
+}
+window.addEventListener('scroll', scrollActive)
+
+
+/*=============== CHANGE BACKGROUND HEADER ===============*/
+function scrollHeader(){
+    const header = document.getElementById('header')
+    // When the scroll is greater than 80 viewport height, add the scroll-header class to the header tag
+    if(this.scrollY >= 80) header.classList.add('scroll-header'); else header.classList.remove('scroll-header')
+}
+window.addEventListener('scroll', scrollHeader)
+
+
+
+
+// slider banner script 
+
+
+let currentIndex = 0;
+let slides = document.querySelectorAll('.slide');
+let totalSlides = slides.length;
+let dots = document.querySelectorAll('.dot');
+let slideInterval;
+
+document.querySelector('.next').addEventListener('click', () => {
+    moveToNextSlide();
+    resetInterval();
+});
+
+document.querySelector('.prev').addEventListener('click', () => {
+    moveToPreviousSlide();
+    resetInterval();
+});
+
+function updateSlidePosition() {
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+    });
+}
+
+function moveToNextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlidePosition();
+}
+
+function moveToPreviousSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlidePosition();
+}
+
+function resetInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(moveToNextSlide, 3000);
+}
+
+function currentSlide(index) {
+    currentIndex = index;
+    updateSlidePosition();
+    resetInterval();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    slideInterval = setInterval(moveToNextSlide, 3000);
+});
+
+</script>
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- Explore -->
+
+<div class="explr" id="explr"> 
+<br>
+    <!-- Placement box -->
+    <div>
+        <div>
+            <div class="container002 containeres">
+    
+                <div class="card002 data-structures002">
+                    <span>Aptitude Test</span>
+                    <p style="font-size:0.5rem; line-height:10px; margin-top: 10px;">Array, Linked List, Stack, Queue, Binary Tree, etc.</p>
+                </div>
+    
+                <div class="card002 quizzes002">
+                    <span>Coding Round</span>
+                    <!-- <p>C++ Quiz, Java Quiz, Aptitude, DBMS, etc.</p> -->
+                </div>
+                <div class="card002 interview-experiences002">
+                    <span>Technical Round</span>
+                    <!-- <p>Latest from Amazon, Google, Adobe, Oracle, Flipkart etc.</p> -->
+                </div>
+                <div class="card002 potd002">
+                    <span>Interview</span>
+                    <!-- <p>New coding challenge everyday</p> -->
+                </div>
+                <div class="card002 potd002">
+                    <span>Interview</span>
+                    <!-- <p>New coding challenge everyday</p> -->
+                </div>
+                <div class="card002 potd002">
+                    <span>Interview</span>
+                    <!-- <p>New coding challenge everyday</p> -->
+                </div>
+                <div class="card002 potd002">
+                    <span>Interview</span>
+                    <!-- <p>New coding challenge everyday</p> -->
+                </div>
+                <div class="card002 potd002">
+                    <span>Interview</span>
+                    <!-- <p>New coding challenge everyday</p> -->
+                </div>
+            </div>
+        </div>
+    
+        <style>
+        .container002 {
+            max-width: 100%;
+            margin-top:2%;
+            display: flex;
+            height: auto;
+            width: 100%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .card002 {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            margin: 7px;
+        }
+    
+        .card002 span {
+            margin-top: 0;
+            font-weight: 500;
+            line-height: 17px;
+        }
+    
+        .algorithms002 {
+            background: linear-gradient(to bottom right, #56ccf2, #2f80ed);
+            color: white;
+        }
+    
+        .data-structures002 {
+            background: linear-gradient(to bottom right, #bb6bd9, #8e44ad);
+            color: white;
+        }
+    
+        .languages002 {
+            background: linear-gradient(to bottom right, #ff9a9e, #ff6a88);
+            color: white;
+        }
+    
+        .quizzes002 {
+            background: linear-gradient(to bottom right, #a18cd1, #fbc2eb);
+            color: white;
+        }
+    
+        .interview-experiences002 {
+            background: linear-gradient(to bottom right, #43cea2, #185a9d);
+            color: white;
+        }
+    
+        .potd002 {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            color: white;
+        }
+    
+        .responsive-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    
+        @media (max-width: 600px) {
+            .card002 {
+                width: 150px;
+                height: 100px;
+            }
+    
+            .container002 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    
+        @media (min-width: 601px) {
+            .card002 {
+                width: 23%;
+                height: 90px;
+            }
+            .container002 {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+        </style>
+    </div>
+
+
+<!-- top interview experiences by our college -->
+
+      <div> 
+        <style>
+            .container4 {
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+                /* background: #fff; */
+                /* padding: 20px; */
+                /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+                /* border-radius: 10px; */
+                margin-bottom: 10px;
+            }
+        
+            .slider-container4 {
+                overflow: hidden;
+            }
+        
+            .slider4 {
+                display: flex;
+                transition: transform 0.5s ease;
+            }
+        
+            .slide4 {
+                min-width: 80%;
+                margin-right: 10%;
+                overflow: hidden;
+                /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        
+            .slide4 img {
+                width: 100%;
+                height: auto;
+                border-radius: 10px;
+            }
+        
+            .details4 {
+                padding: 10px;
+                width: 100%;
+            }
+        
+            .details4 p {
+                margin: 0;
+                font-size: 14px;
+                color: #333;
+                line-height: 1.2;
+                font-weight: 500;
+        
+            }
+        
+            .prev4, .next4 {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: rgba(0,0,0,0.5);
+                color: #fff;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 50%;
+                display: none; /* Hidden by default */
+            }
+        
+            .prev4 {
+                left: 10px;
+            }
+        
+            .next4 {
+                right: 10px;
+            }
+        
+            /* Show buttons on larger screens */
+            @media (min-width: 768px) {
+                .prev4, .next4 {
+                    display: block;
+                }
+        
+                .slide4 {
+                    min-width: 30%;
+                    margin-right: 2.5%;
+                }
+            }
+        
+            @media (min-width: 1024px) {
+                .slide4 {
+                    min-width: 40%;
+                    margin-right: 2.5%;
+                }
+            }
+        
+        </style>
+        
+        <div class="container4 containeres">
+
+            <div class="Find_all2">
+                <h4 style="font-size: 1rem; margin-top: 3px;">On-Campus Companies</h4>
+                <a href="#" id="seeAll01">Show all</a>
+              
+                <style>
+                  .Find_all2 {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px 0;
+                    align-items: center;
+                    text-align: center;
+                  }
+              
+                  .Find_all2 a {
+                    text-decoration: none;
+                    font-weight: 500;
+                    font-size: 15px;
+                  }
+                </style>
+              </div>
+
+            <div class="slider-container4">
+                <div class="slider4">
+                    <div class="slide4">
+                        <img class="images4" src="mobile.webp" alt="Swapping Pairs">
+                        <div class="details4">
+                            <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                            <p>06/06/2024</p>
+                        </div>
+                    </div>
+        
+                    <div class="slide4">
+                        <img src="mobile.webp" alt="Swapping Pairs">
+                        <div class="details4">
+                            <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                            <p>06/06/2024</p>
+                        </div>
+                    </div>
+        
+                    <div class="slide4">
+                        <img src="mobile.webp" alt="Swapping Pairs">
+                        <div class="details4">
+                            <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                            <p>06/06/2024</p>
+                        </div>
+                    </div>
+                    <!-- Add more slides as needed -->
+                </div>
+            </div>
+            <button class="prev4" onclick="slide4(-1)">&#10094;</button>
+            <button class="next4" onclick="slide4(1)">&#10095;</button>
+
+        
+        </div>
+
+        
+        </div>
+      
+
+<!-- Trending Videos -->
+
+<div> 
+    <style>
+        .container4 {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            /* background: #fff; */
+            /* padding: 20px; */
+            /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+            /* border-radius: 10px; */
+            margin-bottom: 10px;
+        }
+    
+        .slider-container4 {
+            overflow: hidden;
+        }
+    
+        .slider4 {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+    
+        .slide4 {
+            min-width: 80%;
+            margin-right: 10%;
+            overflow: hidden;
+            /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .slide4 img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    
+        .details4 {
+            padding: 10px;
+            width: 100%;
+        }
+    
+        .details4 p {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.2;
+            font-weight: 500;
+    
+        }
+    
+        .prev4, .next4 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: none; /* Hidden by default */
+        }
+    
+        .prev4 {
+            left: 10px;
+        }
+    
+        .next4 {
+            right: 10px;
+        }
+    
+        /* Show buttons on larger screens */
+        @media (min-width: 768px) {
+            .prev4, .next4 {
+                display: block;
+            }
+    
+            .slide4 {
+                min-width: 30%;
+                margin-right: 2.5%;
+            }
+        }
+    
+        @media (min-width: 1024px) {
+            .slide4 {
+                min-width: 40%;
+                margin-right: 2.5%;
+            }
+        }
+    
+    </style>
+    
+    <div class="container4 containeres">
+
+        <div class="Find_all2">
+            <h4 style="font-size: 1rem; margin-top: 3px;">On-Campus Companies</h4>
+            <a href="#" id="seeAll01">Show all</a>
+          
+            <style>
+              .Find_all2 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 0;
+                align-items: center;
+                text-align: center;
+              }
+          
+              .Find_all2 a {
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 15px;
+              }
+            </style>
+          </div>
+
+        <div class="slider-container4">
+            <div class="slider4">
+                <div class="slide4">
+                    <img class="images4" src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+    
+                <div class="slide4">
+                    <img src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+    
+                <div class="slide4">
+                    <img src="mobile.webp" alt="Swapping Pairs">
+                    <div class="details4">
+                        <p>PROBLEM OF THE DAY: 05/06/2024 | Swapping pairs ...</p>
+                        <p>06/06/2024</p>
+                    </div>
+                </div>
+                <!-- Add more slides as needed -->
+            </div>
+        </div>
+        <button class="prev4" onclick="slide4(-1)">&#10094;</button>
+        <button class="next4" onclick="slide4(1)">&#10095;</button>
+
+    
+    </div>
+
+    
+    </div>
+  
+
+
+<br><br>
+</div>
+
+
+<!-- EXams  -->
+
+<div class="exm" id="exm"> 
+    <br>
+    <div> 
+        <div class="search-container">
+            <span class="heading">Select the goal you want... </span>
+               
+            </div>
+    
+        <div class="container">
+            <ul id="category-list">
+                <li onclick="showOptions('neet')">
+                    <div class="category-info">
+                        <span class="category-name">NEET</span>
+                        <span class="category-subtitle">Class 11 | Class 12 | Class 12+</span>
+                    </div>
+                </li>
+                <li onclick="showOptions('iitjee')">
+                    <div class="category-info">
+                        <span class="category-name">IIT-JEE</span>
+                        <span class="category-subtitle">Class 11 | Class 12 | Class 12+</span>
+                    </div>
+                </li>
+                <!-- Add more categories here -->
+            </ul>
+    
+            <ul id="subcategory-list" style="display: none;">
+                <!-- Subcategories will be dynamically inserted here -->
+            </ul>
+        </div>
+        <button id="back-btn" style="display: none;" onclick="showCategories()">Back to Categories</button>
+
+    
+    
+    
+    <style>
+        /* styles.css */
+    .search-container {
+        /* margin-top: 2%; */
+        width: 100%;
+        position: fixed;
+        /* top: 0; */
+        left: 0;
+        right: 0;
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    
+    .container {
+        width: 100%;
+        padding: 95px 10px 10px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        flex: 1;
+    }
+    
+    .heading {
+        width: 100%;
+        /* padding: 10px; */
+        font-size: 1.1rem;
+        /* font-weight:bold; */
+        /* border: 2px solid #ffffff; */
+        /* border-radius: 10px; */
+        /* margin-top:10px; */
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        /* padding-left: 40px; */
+        background-size: 20px;
+    }
+    
+    #category-list, #subcategory-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    #category-list li, #subcategory-list li {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+    
+    #category-list li .category-info, #subcategory-list li .subcategory-info {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: auto;
+    }
+    
+    #category-list li .category-name, #subcategory-list li .subcategory-name {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    #category-list li .category-subtitle {
+        font-size: 14px;
+        color: #666;
+    }
+    
+    .subcategory-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    
+}
+
+.subcategory-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.subcategory-item:hover {
+    background-color: #f0f0f5;
+}
+
+
+    @media (max-width: 600px) {
+        #search-bar {
+            font-size: 14px;
+            padding: 8px;
+        }
+    
+        #category-list li, #subcategory-list li {
+            padding: 8px;
+            font-size: 14px;
+        }
+    }
+    
+    #back-btn {
+        width: calc(100% - 20px);
+        padding: 10px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        position: fixed;
+        bottom:0;
+        left: 0;
+        right: 0;
+        margin-bottom: 14%;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-family: Poppins, sans-serif;
+    }
+    
+    #back-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    </style>
+    
+<script>
+    const options = {
+    neet: ["11", "12", "12+"],
+    iitjee: ["11", "12", "12+"],
+    // Add other categories here
+};
+
+const subOptions = {
+    neet: {
+        11: { "Physics": "https://example.com/physics", "Chemistry": "https://example.com/chemistry", "Biology": "https://example.com/biology" },
+        12: { "Physics": "https://example.com/physics", "Chemistry": "https://example.com/chemistry", "Biology": "https://example.com/biology" },
+        "12+": { "Physics": "https://example.com/physics", "Chemistry": "https://example.com/chemistry", "Biology": "https://example.com/biology" }
+    },
+    iitjee: {
+        11: { "Physics": "https://example.com/physics", "Chemistry": "https://example.com/chemistry", "Mathematics": "https://example.com/mathematics" },
+        12: { "Physics": "https://example.com/physics", "Chemistry": "https://example.com/chemistry", "Mathematics": "https://example.com/mathematics" },
+        "12+": { "Physics": "https://example.com/physics", "Chemistry": "https://example.com/chemistry", "Mathematics": "https://example.com/mathematics" }
+    },
+    // Add other subcategories here
+};
+
+function showOptions(category) {
+    const categoryList = document.getElementById('category-list');
+    const subcategoryList = document.getElementById('subcategory-list');
+    const backBtn = document.getElementById('back-btn');
+
+    categoryList.style.display = 'none';
+    subcategoryList.innerHTML = ""; // Clear previous subcategories
+
+    options[category].forEach(subcategory => {
+        const li = document.createElement('li');
+        li.innerHTML = `<div class="subcategory-info"><span class="subcategory-name">${subcategory}</span></div>`;
+        li.onclick = () => showSubOptions(category, subcategory);
+        subcategoryList.appendChild(li);
+    });
+
+    subcategoryList.style.display = 'block';
+    backBtn.style.display = 'block';
+}
+
+function showSubOptions(category, subcategory) {
+    const subcategoryList = document.getElementById('subcategory-list');
+    subcategoryList.innerHTML = ""; // Clear previous options
+
+    const subjects = subOptions[category][subcategory];
+    for (const subject in subjects) {
+        const li = document.createElement('li');
+        li.className = 'subcategory-item'; // Add a class to style the list item
+        const link = document.createElement('a');
+        link.href = subjects[subject];
+        link.textContent = subject;
+        link.target = "_blank"; // Open link in new tab/window
+        li.appendChild(link);
+        subcategoryList.appendChild(li);
+    }
+}
+
+function showCategories() {
+    const categoryList = document.getElementById('category-list');
+    const subcategoryList = document.getElementById('subcategory-list');
+    const backBtn = document.getElementById('back-btn');
+
+    if (subcategoryList.style.display === 'block') {
+        subcategoryList.style.display = 'none';
+        categoryList.style.display = 'block';
+    } else {
+        categoryList.style.display = 'block';
+        backBtn.style.display = 'none';
+    }
+}
+
+</script>
+
+    
+</div>
+    
+    
+</div>
+    
+
+
+<!-- Notification -->
+
+<div class="ntfn" id="ntfn"> 
+    <br>
+    <div> 
+        <div class="webinarcontainer">
+            <h4 class="heading">No Webinar Conducted Yet... </h4>
+               
+            </div>
+
+    <style>
+        /* styles.css */
+    .webinarcontainer {
+        /* margin-top: 2%; */
+        width: 100%;
+        position: fixed;
+        /* top: 0; */
+        left: 0;
+        right: 0;
+        padding: 30px;
+        z-index: 1;
+        box-sizing: border-box;
+        text-align: center;
+        justify-content: baseline;
+
+    }
+    </style>
+    
+
+
+    
+</div>
+
+</div>
+
+<!-- Jobs -->
+
+       <!-- Add more job cards as needed -->
+   
+<div class="jbs" id="jbs">
+    <br>
+    <div class="webinarcontainers">
+        
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab-indicator"></div>
+                <button class="tab-button" data-tab="1">Internship</button>
+                <button class="tab-button left-right-border" data-tab="2" style="padding-right:10px;">Jobs</button>
+                <button class="tab-button" data-tab="3" style="padding-right: 24px;">Others</button>
+            </div>
+        </div>
+
+        <div class="job-container">
+            <div class="job-card">
+                <div class="logo-title">
+                    <img src="sinhgad.jpg" alt="Company Logo" class="company-logo">
+                    <div class="job-title">TCS - Multiple Role</div>
+                </div>
+                <div class="company-name">For CS/IT Students</div>
+                <div class="job-details">
+                    <span>IT/CS</span>
+                    <span>Upto 7.5L</span>
+                    <span>on-campus</span>
+                </div>
+                <hr>
+                <div class="flexbtn" > <div class="apply-before">Apply before Wed Jul 31 2024</div>
+                <button class="apply-button">Apply</button></div>
+        
+            </div>
+        
+            <div class="job-card">
+                <div class="logo-title">
+                    <img src="sinhgad.jpg" alt="Company Logo" class="company-logo">
+                    <div class="job-title">TCS - Multiple Role</div>
+                </div>
+                <div class="company-name">For CS/IT Students</div>
+                <div class="job-details">
+                    <span>IT/CS</span>
+                    <span>Upto 7.5L</span>
+                    <span>on-campus</span>
+                </div>
+                <hr>
+                <div class="flexbtn" > <div class="apply-before">Apply before Wed Jul 31 2024</div>
+                <button class="apply-button">Apply</button></div>
+        
+            </div>
+        
+        
+        <div class="job-card">
+                <div class="logo-title">
+                    <img src="sinhgad.jpg" alt="Company Logo" class="company-logo">
+                    <div class="job-title">TCS - Multiple Role</div>
+                </div>
+                <div class="company-name">For CS/IT Students</div>
+                <div class="job-details">
+                    <span>IT/CS</span>
+                    <span>Upto 7.5L</span>
+                    <span>on-campus</span>
+                </div>
+                <hr>
+                <div class="flexbtn" > <div class="apply-before">Apply before Wed Jul 31 2024</div>
+                <button class="apply-button">Apply</button></div>
+        
+            </div>
+        
+            <!-- Add more job cards as needed -->
+        </div>
+   
+    </div>
+    <style>
+   
+        /* styles.css */
+        .webinarcontainers {
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .tabs-container {
+            margin-top: 2%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .tabs {
+            width: 90%;
+            position: relative;
+            display: flex;
+            background-color: #f0f0f0;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            justify-content: space-between;
+        }
+
+        .tab-button {
+            /* padding: 10px 25px; */
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .tab-button:hover {
+            color: #2196F3;
+        }
+
+        .tab-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 33.33%;
+            height: 100%;
+            border-radius:50px;
+            color: #fff;
+            border: 1px solid #343434;
+            background-color:transparent;
+            transition: left 0.3s;
+        }
+
+        .tab-content {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            width: 80%;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .job-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .job-card {
+            border-radius: 8px;
+            margin: 18px;
+            padding: 20px;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .company-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .job-title {
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        .company-name {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .job-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .job-details span {
+            display: block;
+            margin: 6px 0 0 0;
+            font-size: 13px;
+        }
+
+        .flexbtn {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .apply-before {
+            color: #888;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+
+        .apply-button {
+            background-color: #283fa7;
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .apply-button:hover {
+            background-color: #e7e7ef;
+            border: 1px solid #283fa7;
+            color: #0056b3;
+        }
+
+        @media (min-width: 768px) {
+            .job-container {
+                flex-wrap: nowrap;
+            }
+
+            .job-card {
+                width: 30%;
+            }
+        }
+    </style>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const tabIndicator = document.querySelector(".tab-indicator");
+        const tabContents = document.querySelectorAll(".tab-content");
+    
+        tabButtons.forEach((button, index) => {
+            button.addEventListener("click", () => {
+                let indicatorPosition = (100 / tabButtons.length) * index;
+                tabIndicator.style.left = `calc(${indicatorPosition}% + 0%)`;
+    
+                tabButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+    
+                tabContents.forEach(content => content.classList.remove("active"));
+                document.getElementById(`tab-content-${button.dataset.tab}`).classList.add("active");
+            });
+        });
+    
+        // Initialize the first tab as active
+        tabButtons[0].classList.add("active");
+        tabContents[0].classList.add("active");
+    });
+    
+    </script></script>
+
+</div>
+
+<!-- changing window code -->
+
+<div>
+
+<script>
+    var btn_ftr = document.getElementById("btn_ftr");
+    var btn_exp = document.getElementById("btn_exp");
+    var btn_exam= document.getElementById("btn_exam") ;
+    var btn_ntfn = document.getElementById("btn_ntfn") ;
+    var btn_jbs = document.getElementById("btn_jbs") ;
+
+
+    var ftr = document.getElementById("ftr");
+    var explr = document.getElementById("explr");
+    var exm = document.getElementById("exm") ;
+    var ntfn = document.getElementById("ntfn") ;
+    var jbs = document.getElementById("jbs") ;
+    var cmlt = document.getElementById("cmlt") ;
+
+ btn_ftr.addEventListener('click',()=> {
+    ftr.style.display='block';
+    explr.style.display='none';
+    exm.style.display='none';
+    ntfn.style.display='none';
+    jbs.style.display='none';
+ });
+
+
+
+ btn_exp.addEventListener('click',()=> {
+    ftr.style.display='none';
+    explr.style.display='block';
+    exm.style.display='none';
+    ntfn.style.display='none';
+    jbs.style.display='none';
+ });
+
+
+ btn_exam.addEventListener('click',()=> {
+    ftr.style.display='none';
+    explr.style.display='none';
+    exm.style.display='block';
+    ntfn.style.display='none';
+    jbs.style.display='none';
+ })
+
+
+ btn_ntfn.addEventListener('click',()=> {
+    ftr.style.display='none';
+    explr.style.display='none';
+    exm.style.display='none';
+    ntfn.style.display='block';
+    jbs.style.display='none';
+ })
+
+
+ btn_jbs.addEventListener('click',()=> {
+    ftr.style.display='none';
+    explr.style.display='none';
+    exm.style.display='none';
+    ntfn.style.display='none';
+    jbs.style.display='block';
+ })
+
+
+
+</script>
+
+
+<style>
+
+    .explr{
+    display: none;
+    }
+    
+    .exm{
+    display: none;
+    }
+    
+    
+    .ntfn{
+    display: none;
+    }
+    
+    
+    .jbs{
+    display: none;
+    }
+    
+    
+</style>
+
+
+</div>
+
+
+
+
+<!-- login -->
+
+<div>
+    <!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      max-height: 600px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      animation: animatezoom 0.6s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .imgcontainer {
+      text-align: center;
+      background: #764ba2;
+      padding: 20px;
+      width: 100%;
+      border-bottom: 1px solid #ccc;
+    }
+
+    img.avatar {
+      width: 80px;
+      border-radius: 50%;
+      border: 1px solid #764ba2;
+    }
+
+    .container {
+      padding: 20px;
+      width: 100%;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .container input[type=text], .container input[type=password], .container input[type=tel], .container select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .container input[type=checkbox] {
+      margin-top: 16px;
+    }
+
+    .container .psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    .container .register {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .container .logbtn {
+      background-color: #764ba2;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #622382;
+    }
+
+    @keyframes animatezoom {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    @media screen and (max-width: 600px) {
+      .modal-content {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .progress-container {
+      width: 100%;
+      background: #f7f7f7;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .progress-bar {
+      height: 5;
+      height: 5px;
+      background: #764ba2;
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+<div class="overlay hidden" id="login-overlay">
+  <div class="modal-content animate">
+    <div class="imgcontainer">
+      <img src="sinhgad.jpg" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div class="container" id="login-form">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+      <button type="button" onclick="checkLogin()" class="logbtn">Login</button>
+      <input type="checkbox" checked="checked"> Remember me
+
+      <span class="psw">Forgot <a href="#">password?</a></span>
+      <span class="register">Not registered? <a href="#" id="show-register">Create an account</a></span>
+    </div>
+
+    <div class="container hidden" id="register-form-step-1">
+      <label for="name"><b>Name</b></label>
+      <input type="text" placeholder="Enter Name" name="name" required>
+
+      <label for="uname-reg"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname-reg" required>
+
+      <label for="mobile"><b>Mobile Number</b></label>
+      <input type="tel" placeholder="Enter Mobile Number" name="mobile" required>
+
+      <button type="button" id="next-step" class="logbtn">Next</button>
+      <span class="register">Already have an account? <a href="#" id="show-login">Login</a></span>
+    </div>
+
+    <div class="container hidden" id="register-form-step-2">
+      <label for="college"><b>College Name</b></label>
+      <select name="college" required>
+        <option value="">Select College</option>
+        <option value="College1">College 1</option>
+        <option value="College2">College 2</option>
+        <option value="College3">College 3</option>
+      </select>
+
+      <label for="branch"><b>College Branch</b></label>
+      <select name="branch" required>
+        <option value="">Select Branch</option>
+        <option value="Branch1">Branch 1</option>
+        <option value="Branch2">Branch 2</option>
+        <option value="Branch3">Branch 3</option>
+      </select>
+
+      <label for="psw-reg"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw-reg" required>
+
+      <label for="psw-confirm"><b>Confirm Password</b></label>
+      <input type="password" placeholder="Confirm Password" name="psw-confirm" required>
+
+      <button type="button" id="previous-step" class="logbtn">Back</button>
+      <button type="button" onclick="register()" class="logbtn">Register</button>
+      <span class="register">Already have an account? <a href="#" id="show-login2">Login</a></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  var showRegisterBtn = document.getElementById('show-register');
+  var showLoginBtn = document.getElementById('show-login');
+  var showLoginBtn2 = document.getElementById('show-login2');
+
+  var loginForm = document.getElementById('login-form');
+  var registerFormStep1 = document.getElementById('register-form-step-1');
+  var registerFormStep2 = document.getElementById('register-form-step-2');
+  var nextStepBtn = document.getElementById('next-step');
+  var previousStepBtn = document.getElementById('previous-step');
+  var progressBar = document.getElementById('progress-bar');
+  var loginOverlay = document.getElementById('login-overlay');
+
+  showRegisterBtn.onclick = function() {
+    loginForm.classList.add('hidden');
+    registerFormStep1.classList.remove('hidden');
+    progressBar.style.width = '50%';
+  }
+
+  showLoginBtn.onclick = function() {
+    registerFormStep1.classList.add('hidden');
+    registerFormStep2.classList.add('hidden');
+    loginForm.classList.remove('hidden');
+    progressBar.style.width = '0%';
+  }
+
+  showLoginBtn2.onclick = function() {
+    registerFormStep1.classList.add('hidden');
+    registerFormStep2.classList.add('hidden');
+    loginForm.classList.remove('hidden');
+    progressBar.style.width = '0%';
+  }
+
+  nextStepBtn.onclick = function() {
+    registerFormStep1.classList.add('hidden');
+    registerFormStep2.classList.remove('hidden');
+    progressBar.style.width = '100%';
+  }
+
+  previousStepBtn.onclick = function() {
+    registerFormStep2.classList.add('hidden');
+    registerFormStep1.classList.remove('hidden');
+    progressBar.style.width = '50%';
+  }
+
+ 
+  var showRegisterBtn = document.getElementById('show-register');
+var showLoginBtn = document.getElementById('show-login');
+var loginForm = document.getElementById('login-form');
+var registerFormStep1 = document.getElementById('register-form-step-1');
+var registerFormStep2 = document.getElementById('register-form-step-2');
+var nextStepBtn = document.getElementById('next-step');
+var previousStepBtn = document.getElementById('previous-step');
+var progressBar = document.getElementById('progress-bar');
+var loginOverlay = document.getElementById('login-overlay');
+
+showRegisterBtn.onclick = function() {
+  loginForm.classList.add('hidden');
+  registerFormStep1.classList.remove('hidden');
+  progressBar.style.width = '50%';
+}
+
+showLoginBtn.onclick = function() {
+  registerFormStep1.classList.add('hidden');
+  registerFormStep2.classList.add('hidden');
+  loginForm.classList.remove('hidden');
+  progressBar.style.width = '0%';
+}
+
+nextStepBtn.onclick = function() {
+  registerFormStep1.classList.add('hidden');
+  registerFormStep2.classList.remove('hidden');
+  progressBar.style.width = '100%';
+}
+
+previousStepBtn.onclick = function() {
+  registerFormStep2.classList.add('hidden');
+  registerFormStep1.classList.remove('hidden');
+  progressBar.style.width = '50%';
+}
+
+var showRegisterBtn = document.getElementById('show-register');
+var showLoginBtn = document.getElementById('show-login');
+var loginForm = document.getElementById('login-form');
+var registerFormStep1 = document.getElementById('register-form-step-1');
+var registerFormStep2 = document.getElementById('register-form-step-2');
+var nextStepBtn = document.getElementById('next-step');
+var previousStepBtn = document.getElementById('previous-step');
+var progressBar = document.getElementById('progress-bar');
+var loginOverlay = document.getElementById('login-overlay');
+
+showRegisterBtn.onclick = function() {
+  loginForm.classList.add('hidden');
+  registerFormStep1.classList.remove('hidden');
+  progressBar.style.width = '50%';
+}
+
+showLoginBtn.onclick = function() {
+  registerFormStep1.classList.add('hidden');
+  registerFormStep2.classList.add('hidden');
+  loginForm.classList.remove('hidden');
+  progressBar.style.width = '0%';
+}
+
+nextStepBtn.onclick = function() {
+  registerFormStep1.classList.add('hidden');
+  registerFormStep2.classList.remove('hidden');
+  progressBar.style.width = '100%';
+}
+
+previousStepBtn.onclick = function() {
+  registerFormStep2.classList.add('hidden');
+  registerFormStep1.classList.remove('hidden');
+  progressBar.style.width = '50%';
+}
+
+function checkLogin() {
+  var username = document.getElementById('uname').value;
+  var password = document.getElementById('psw').value;
+
+  // Example check (replace with actual authentication logic)
+  if (username === 'user' && password === 'password') {
+    alert('Login successful! Redirecting...');
+
+    // Save login details to localStorage with an expiration time of 24 hours
+    var now = new Date().getTime();
+    var expirationTime = now + 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
+    localStorage.setItem('loginExpiration', expirationTime);
+
+    // Redirect to another page
+    window.location.href = '#'; // Replace with your desired redirect URL
+  } else {
+    alert('Incorrect username or password. Please try again.');
+  }
+}
+
+// Function to check if the user is still logged in
+function checkLoginExpiration() {
+  var now = new Date().getTime();
+  var loginExpiration = localStorage.getItem('loginExpiration');
+
+  if (loginExpiration && now < loginExpiration) {
+    // User is still logged in, redirect to the main page
+    window.location.href = '#'; // Replace with your desired redirect URL
+  } else {
+    // Login has expired, clear the stored credentials
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
+    localStorage.removeItem('loginExpiration');
+  }
+}
+
+// Show the overlay on page load
+window.onload = function() {
+  checkLoginExpiration();
+  loginOverlay.classList.remove('hidden');
+}
+
+
+function checkLoginExpiration() {
+  var now = new Date().getTime();
+  var loginExpiration = localStorage.getItem('loginExpiration');
+
+  console.log('Current Time:', now);
+  console.log('Expiration Time:', loginExpiration);
+
+  if (loginExpiration && now < loginExpiration) {
+    console.log('User is still logged in. Redirecting to dashboard.');
+    window.location.href = '#'; // Replace with your desired redirect URL
+  } else {
+    console.log('Login has expired or not logged in. Showing login modal.');
+    // Login has expired, clear the stored credentials
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
+    localStorage.removeItem('loginExpiration');
+  }
+}
+
+
+</script>
+
+</body>
+</html>
+
+</div>
