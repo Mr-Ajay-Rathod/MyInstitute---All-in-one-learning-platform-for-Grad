@@ -1,9 +1,13 @@
 
-# SppuHub: Prep-Jobs and More
+# Myinstitute: Prep-Jobs and More
 
 ### Overview :
 
 SppuHub is an Ed-tech platform dedicated to improving academic education and prioritizing on-campus job placements. The platform, built using advanced front-end technology, offers user-friendly interfaces and robust features for effective learning. SppuHub supports students from their first year to their final placement, ensuring a comprehensive educational journey.
+
+
+## Link : www.myinstitute.in
+
 
 ## Features
 
